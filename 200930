@@ -1,0 +1,16 @@
+class Solution {
+    public long solution(int a, int b) {
+        long answer = 0;
+        
+        if(a==b) return a;
+        
+        long low; long high;
+        if(a>b) { low=b; high=a; }
+        else { low=a; high=b;}
+            
+        for(long i=low; i<=high; i++)
+                answer += i;
+        
+        return answer;
+    }
+}
