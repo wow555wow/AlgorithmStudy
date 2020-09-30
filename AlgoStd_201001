@@ -1,0 +1,15 @@
+class Solution {
+    public long[] solution(int x, int n) {
+        long[] answer = {};
+        
+        answer = new long[n];
+        long l = 0;
+        for(int i=0; i<n; i++) {
+            l += (long)x;
+            answer [i] = l;
+//            answer[i] = (long) (x * (i+1));
+        }
+        
+        return answer;
+    }
+}
