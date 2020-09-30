@@ -3,11 +3,14 @@ class Solution {
         long[] answer = {};
         
         answer = new long[n];
-        long l = 0;
+//        long l = 0;
         for(int i=0; i<n; i++) {
-            l += (long)x;
-            answer [i] = l;
-//            answer[i] = (long) (x * (i+1));
+//            l += (long)x;
+//            answer [i] = l;
+
+//            answer[i] = (long) (x * (i+1));   //실패
+
+            answer[i] = (long)x * (i+1));   //성공
         }
         
         return answer;
@@ -20,4 +23,6 @@ long - int 간 연산 확인
 10 라인처럼 하면 될 것 같았는데 TC 13, 14에서 실패.
 캐스팅을 for문 밖에서 하면 정상처리된다는 답변을 보고 수정함.
 
+int간 연산 후 long으로 캐스팅 하는 경우 실패
+int->long 변환 후 long-int간 연산 시 
 */
