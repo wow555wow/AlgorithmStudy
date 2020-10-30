@@ -7,7 +7,7 @@ public class AlgoStd_201030 {
 		
 		
 //		solution_2(2, 4, 2, 1);
-		solution_2(16, 16, 2, 1);
+		solution_2(16, 16, 2, 2);
 
 	}
 	
@@ -20,7 +20,7 @@ public class AlgoStd_201030 {
 	
 	/** [3차] n진수 게임 : n진법 숫자를 차례로 말한다. 자릿수로 끊어서 말함
 	 * 
-	 * elaps : 22:30 ~ 
+	 * elaps : 10/29 22:30 ~ 10/30 23: 
 	 * 
 	 * @param n : 진법
 	 * @param t : 미리 구할 숫자의 갯수(튜브가 말할)
@@ -74,39 +74,41 @@ public class AlgoStd_201030 {
         String answer = "";
         
         int i=0;	//숫자 증가용
-        int order=1;	//말할 순번 증가용
+        int order=0;	//말할 순번 증가용 :: order=1로 할 경우 order%m == p-1 연산에서 구멍이 생긴다. 유의할 것
         while(t > answer.length()) {	// t개 구할 떄까지 반복
         	
-        	//n진수 구하기
+        	//n진수 구하기 >> 함수로 빼는게 깔끔하고 좋았을 듯
         	int decimal = i++;	//decimal(진수변환용 변수)에 넣은 뒤 i 증가
         	String converted = "";
         	while(0 < decimal) {
         		
         		// 두자리 숫자 처리
         		int rest = decimal%n;
-        		if(10 >= rest) {
+        		if(10 <= rest) {
+//        			char c = 0;	//char 변환을 위한 변수
+        			String s = "";
         			switch(rest) {
-    				case(10) : rest = 'A';
-    				case(11) : rest = 'B';
-    				case(12) : rest = 'C';
-    				case(13) : rest = 'D';
-    				case(14) : rest = 'E';
+    				case(10) : s = "A"; break;	//case-break; 항상 짝꿍임.. break; 안해주면 결과 이상할 때 있음
+    				case(11) : s = "B"; break;
+    				case(12) : s = "C"; break;
+    				case(13) : s = "D"; break;
+    				case(14) : s = "E"; break;
+    				case(15) : s = "F"; break;
         			}
-        		}
+        			converted = s + converted;
+        		}else 
+        			converted = rest + converted;
         		
-        		converted = rest + converted;
         		decimal /= n;	//1 이후 0까지 도달 후 반복문 탈출
         	}
         	if(0==converted.length()) converted = "0";	//0인경우 while로 진입하지 않으므로 초기값 0 필요	
-        	System.out.println("진수변환 완료 :: " + converted);
-        	
+//        	System.out.println("진수변환 완료 :: " + converted);
         	
         	//구한 n진수를 하나씩 나열하며 튜브 순서 찾기
         	for(int j=0; j<converted.length(); j++) {
-        		System.out.println("order[" + order + "] people[" + m + "] tube_order[" + (p) + "]");
-        		if(order%m == p) {	// 참가인원들의 순번 중 튜브의 순번과 같은 경우
+        		if(order%m == p-1) {	// 참가인원들의 순번 중 튜브의 순번과 같은 경우
         			answer += converted.charAt(j);
-        			System.out.println("answer >>> " + answer);
+//        			System.out.println("answer >>> " + answer);
         			
         			if(t == answer.length()) break;
         		}
