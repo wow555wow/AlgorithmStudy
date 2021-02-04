@@ -24,64 +24,65 @@ public class AlgoStd_210209_Lv2_TriangleSnail {
         int[] answer = {};
 //        System.out.println("N[" + n + "]");
         
-        // »ï°¢´ÞÆØÀÌÀÇ ±æÀÌ : n + (n-1) + (n-2) + ... ÇØ¼­ 0µÉ¶§±îÁö ´õÇØÁÖ¸é µÊ
+        // ì‚¼ê°ë‹¬íŒ½ì´ì˜ ê¸¸ì´ : n + (n-1) + (n-2) + ... í•´ì„œ 0ë ë•Œê¹Œì§€ ë”í•´ì£¼ë©´ ë¨
         int lenOfSnail = 0;
-//        int temp = n;	//ÀÎÀÚ nÀ» ¹Ù·Î °®´Ù ¾²Áö ¸»±â.. nÀ» 0À¸·Î ¸¸µé¾î¼­ ¹Ø¿¡¼­ ¿¡·¯³µÀ½..
+//        int temp = n;	//ì¸ìž nì„ ë°”ë¡œ ê°–ë‹¤ ì“°ì§€ ë§ê¸°.. nì„ 0ìœ¼ë¡œ ë§Œë“¤ì–´ì„œ ë°‘ì—ì„œ ì—ëŸ¬ë‚¬ìŒ..
         while(n>0) {
         	lenOfSnail += n--;
         }
 //        System.out.println("** len of Snail :: " + lenOfSnail );
-        n = param;	//¿ø·¡°ª ´Ù½Ã ³Ö¾îÁÖ±â
+        n = param;	//ì›ëž˜ê°’ ë‹¤ì‹œ ë„£ì–´ì£¼ê¸°
         
-        int[][] mat = new int[n][n];	//³ôÀÌ n, ¹Øº¯ nÀÎ »ï°¢ÇüÀ» À§ÇÑ ¹è¿­ (´ë°¢¼±À¸·Î ³ª´« Àý¹Ý¸¸ ¾µ °ÍÀÓ)
-        int row = 0; int col = 0;	//¹è¿­ ÀÎµ¦½º
-        int val = 1;	//ºóÄ­¿¡ ³ÖÀ» °ª
-//        int len = 0;	//¹Ýº¹¹® Á¾·á¿ë º¯¼ö : »ï°¢´ÞÆØÀÌ ±æÀÌ¸¸Å­ Ã¤¿ì¸é ¹Ýº¹¹® Å»Ãâ
+        int[][] mat = new int[n][n];	//ë†’ì´ n, ë°‘ë³€ nì¸ ì‚¼ê°í˜•ì„ ìœ„í•œ ë°°ì—´ (ëŒ€ê°ì„ ìœ¼ë¡œ ë‚˜ëˆˆ ì ˆë°˜ë§Œ ì“¸ ê²ƒìž„)
+        int row = 0; int col = 0;	//ë°°ì—´ ì¸ë±ìŠ¤
+        int val = 1;	//ë¹ˆì¹¸ì— ë„£ì„ ê°’
+//        int len = 0;	//ë°˜ë³µë¬¸ ì¢…ë£Œìš© ë³€ìˆ˜ : ì‚¼ê°ë‹¬íŒ½ì´ ê¸¸ì´ë§Œí¼ ì±„ìš°ë©´ ë°˜ë³µë¬¸ íƒˆì¶œ
 //        System.out.println( String.format("mat.len[%d], row[%d], col[%d]", mat.length, row, col) );
         
-        // 1) »ï°¢ ´ÞÆØÀÌ Ã¤¿ì±â
-    	// (0,0)¿¡¼­ ½ÃÀÛ
-    	// 1. row°¡ nÀÌ µÉ¶§±îÁö row¸¸ 1 Áõ°¡½ÃÅ²´Ù
-    	// 2. row°¡ nÀÌ µÇ¸é colÀÌ nÀÌ µÉ¶§±îÁö col¸¸ 1 Áõ°¡½ÃÅ²´Ù
-    	// 3. colÀÌ nÀÌ µÇ¸é row, col ¸ðµÎ 1¾¿ °¨¼Ò½ÃÅ²´Ù.
-    	// 4. (0,0)ÀÌ µÇ±â Àü¿¡ ¸ØÃç¼­ ´Ù½Ã row¸¦ n-1±îÁö Áõ°¡½ÃÅ²´Ù (ÀÌÈÄ ¹Ýº¹)
+        // 1) ì‚¼ê° ë‹¬íŒ½ì´ ì±„ìš°ê¸°
+    	// (0,0)ì—ì„œ ì‹œìž‘
+    	// 1. rowê°€ nì´ ë ë•Œê¹Œì§€ rowë§Œ 1 ì¦ê°€ì‹œí‚¨ë‹¤
+    	// 2. rowê°€ nì´ ë˜ë©´ colì´ nì´ ë ë•Œê¹Œì§€ colë§Œ 1 ì¦ê°€ì‹œí‚¨ë‹¤
+    	// 3. colì´ nì´ ë˜ë©´ row, col ëª¨ë‘ 1ì”© ê°ì†Œì‹œí‚¨ë‹¤.
+    	// 4. (0,0)ì´ ë˜ê¸° ì „ì— ë©ˆì¶°ì„œ ë‹¤ì‹œ rowë¥¼ n-1ê¹Œì§€ ì¦ê°€ì‹œí‚¨ë‹¤ (ì´í›„ ë°˜ë³µ)
         
-        int flag = 0; 	// 0:row Áõ°¡ / 1:col Áõ°¡ / 2:row,col °¨¼Ò
-        while(val <= lenOfSnail) {	// ´ÞÆØÀÌ ±æÀÌ¸¸Å­ ´Ù Ã¤¿ì¸é Á¾·á
-        	if(0 == mat[row][col])	//ºñ¾îÀÖ´Â Ä­¿¡¸¸ °ªÀ» ³Ö´Â´Ù!
-        		mat[row][col] = val++;	//ArrayIndexOutOfBoundsException ¿Ö? > À§¿¡¼­ n°ªÀ» Á¶ÀÛÇß±â ¶§¹®..¤¾
+        int flag = 0; 	// 0:row ì¦ê°€ / 1:col ì¦ê°€ / 2:row,col ê°ì†Œ
+        while(val <= lenOfSnail) {	// ë‹¬íŒ½ì´ ê¸¸ì´ë§Œí¼ ë‹¤ ì±„ìš°ë©´ ì¢…ë£Œ
+        	if(0 == mat[row][col])	//ë¹„ì–´ìžˆëŠ” ì¹¸ì—ë§Œ ê°’ì„ ë„£ëŠ”ë‹¤!
+        		mat[row][col] = val++;	//ArrayIndexOutOfBoundsException ì™œ? > ìœ„ì—ì„œ nê°’ì„ ì¡°ìž‘í–ˆê¸° ë•Œë¬¸..ã…Ž
 //        	System.out.println( String.format("(%d, %d) : [%d]", row, col, mat[row][col]) );
         	
         	switch(flag) {
-        	case 0 :	// row Áõ°¡
+        	case 0 :	// row ì¦ê°€
         		row++;
         		if(row == n || 0 != mat[row][col]) {
-        			flag++;	// Áõ°¡ ÆÐÅÏ º¯°æ
-        			row--;	//nº¸´Ù ÀÛ¾Æ¾ßÇÏ¹Ç·Î ¿øº¹
+        			flag++;	// ì¦ê°€ íŒ¨í„´ ë³€ê²½
+        			row--;	//në³´ë‹¤ ìž‘ì•„ì•¼í•˜ë¯€ë¡œ ì›ë³µ
         		}
         		break;
-        	case 1 : 	// col Áõ°¡
+        	case 1 : 	// col ì¦ê°€
         		col++;
         		if(col == n || 0 != mat[row][col]) {
-        			flag++;	// Áõ°¡ ÆÐÅÏ º¯°æ
-        			col--;	//nº¸´Ù ÀÛ¾Æ¾ß ÇÏ¹Ç·Î ¿øº¹
+        			flag++;	// ì¦ê°€ íŒ¨í„´ ë³€ê²½
+        			col--;	//në³´ë‹¤ ìž‘ì•„ì•¼ í•˜ë¯€ë¡œ ì›ë³µ
         		}
         		break;
-        	case 2 : 	// row, col °¨¼Ò
+        	case 2 : 	// row, col ê°ì†Œ
         		row--; col--;
-        		if(0 != mat[row][col]) {	//ÃÊ±â°ªÀÌ ¾Æ´Ñ °æ¿ì (ÀÌ¹Ì ¹æ¹®ÇÑ °æ¿ì)
-        			flag = 0;	// Áõ°¡ ÆÐÅÏ º¯°æ (row Áõ°¡)
-        			row++; col++;	//¿øº¹
-        			n--;	//¸¶Áö¸· ÁÙÀ» ´Ù Ã¤¿üÀ¸¹Ç·Î nÀ» °¨¼Ò½ÃÄÑ ¸¶Áö¸·ÁÙ¿¡ ´Ù½Ã ¹æ¹®ÇÏÁö ¾Êµµ·Ï ÇÔ
+        		if(0 != mat[row][col]) {	//ì´ˆê¸°ê°’ì´ ì•„ë‹Œ ê²½ìš° (ì´ë¯¸ ë°©ë¬¸í•œ ê²½ìš°)
+        			flag = 0;	// ì¦ê°€ íŒ¨í„´ ë³€ê²½ (row ì¦ê°€)
+        			row++; col++;	//ì›ë³µ
+        			n--;	//ë§ˆì§€ë§‰ ì¤„ì„ ë‹¤ ì±„ì› ìœ¼ë¯€ë¡œ nì„ ê°ì†Œì‹œì¼œ ë§ˆì§€ë§‰ì¤„ì— ë‹¤ì‹œ ë°©ë¬¸í•˜ì§€ ì•Šë„ë¡ í•¨
         		}
+			break;	//ì•ˆí•´ì¤¬ëŠ”ë° ì™œ ì—ëŸ¬ ì•ˆë‚¬ì§€
         	}
 //        	System.out.println("flag :: " + flag);
-        	// Á¾·áÁ¶°Ç.. > len Áõ°¡
+        	// ì¢…ë£Œì¡°ê±´.. > len ì¦ê°€
         }
-        n = param;	//Á¶ÀÛÇß´ø n°ª ¿øº¹
+        n = param;	//ì¡°ìž‘í–ˆë˜ nê°’ ì›ë³µ
         
         System.out.println("===============");
-        // 2) Ã¤¿î ´ÞÆØÀÌ¸¦ À§¿¡¼­ºÎÅÍ ¼ø¼­´ë·Î answer¿¡ ³Ö±â
+        // 2) ì±„ìš´ ë‹¬íŒ½ì´ë¥¼ ìœ„ì—ì„œë¶€í„° ìˆœì„œëŒ€ë¡œ answerì— ë„£ê¸°
         answer = new int[lenOfSnail];
         int idx = 0;
         for(int i=0; i<n; i++) {
